@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/tadejm/sing-along.png)](https://codeclimate.com/github/tadejm/sing-along)
+
 # sing-along #
 
 Fetch current playing song's lyrics directly from your terminal.
