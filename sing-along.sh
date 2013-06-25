@@ -4,7 +4,7 @@ title=`osascript -e 'tell application "iTunes" to name of current track as strin
 
 SERVER="http://sing-along.herokuapp.com/lyrics"
 
-OPTS="-G -A 'Sing-along agent'"
+OPTS="-s -G -A 'Sing-along agent'"
 DATA="--data-urlencode \"artist=${artist}\" --data-urlencode \"title=${title}\""
 
 output=`eval curl $OPTS $SERVER $DATA` > /dev/null
