@@ -7,5 +7,4 @@ SERVER="http://sing-along.herokuapp.com/lyrics"
 OPTS="-s -G -A 'Sing-along agent'"
 DATA="--data-urlencode \"artist=${artist}\" --data-urlencode \"title=${title}\""
 
-output=`eval curl $OPTS $SERVER $DATA` > /dev/null
-echo -e $output | less
+eval curl $OPTS $SERVER $DATA | less
