@@ -1,7 +1,6 @@
 GIT
   remote: git://github.com/tadejm/Lyricfy.git
-  revision: d7724f692cd0742400c8f0ff764af8ce66d1f5d0
-  branch: keep_verses
+  revision: 3a007a30e6d80fe6fe6fe5024ae6ac5364af067b
   specs:
     lyricfy (0.1.0)
       highline
