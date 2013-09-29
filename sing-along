@@ -1,10 +1,50 @@
 #! /bin/bash
-artist=`osascript -e 'tell application "iTunes" to artist of current track as string'`;
-title=`osascript -e 'tell application "iTunes" to name of current track as string'`;
 
-SERVER="http://sing-along.herokuapp.com/lyrics"
+set -e
 
-OPTS="-s -G -A 'Sing-along agent'"
-DATA="--data-urlencode \"artist=${artist}\" --data-urlencode \"title=${title}\""
+clear
 
-eval curl $OPTS $SERVER $DATA | less
+tmpfile="/tmp/singalong-current-song"
+
+function current_artist {
+  echo `osascript -e 'tell application "iTunes" to artist of current track as string'`;
+}
+
+function current_track {
+  echo `osascript -e 'tell application "iTunes" to name of current track as string'`;
+}
+
+function fetch_lyrics {
+  local server="http://sing-along.herokuapp.com/lyrics"
+
+  local opts="-s -G -A 'Sing-along agent'"
+  local data="--data-urlencode 'artist=$1' --data-urlencode 'title=$2'"
+  local result=`curl $opts $server $data`
+  echo "$result"
+}
+
+artist=`current_artist`
+title=`current_track`
+prev_artist="$artist"
+prev_title="$title"
+
+fetch_lyrics "$artist" "$title" > "$tmpfile"
+cat "$tmpfile"
+
+exit
+
+(
+  while true; do
+    artist=`current_artist`
+    title=`current_track`
+
+    if [ "$title" != "$prev_title" ] || [ "$artist" != "$prev_artist" ]; then
+      prev_artist="$artist"
+      prev_title="$title"
+      fetch_lyrics "$artist" "$title" >> "$tmpfile"
+    fi
+    sleep 1
+  done
+)&
+
+less +F "$tmpfile"
