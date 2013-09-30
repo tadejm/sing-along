@@ -1,9 +1,5 @@
 #! /bin/bash
 
-set -e
-
-clear
-
 tmpfile="/tmp/singalong-current-song"
 
 function current_artist {
@@ -16,10 +12,9 @@ function current_track {
 
 function fetch_lyrics {
   local server="http://sing-along.herokuapp.com/lyrics"
+  local agent="-A 'Sing-along agent'"
 
-  local opts="-s -G -A 'Sing-along agent'"
-  local data="--data-urlencode 'artist=$1' --data-urlencode 'title=$2'"
-  local result=`curl $opts $server $data`
+  local result=`curl -s -G "$agent" --data-urlencode "artist=$1" --data-urlencode "title=$2" "$server"`
   echo "$result"
 }
 
@@ -29,9 +24,6 @@ prev_artist="$artist"
 prev_title="$title"
 
 fetch_lyrics "$artist" "$title" > "$tmpfile"
-cat "$tmpfile"
-
-exit
 
 (
   while true; do
