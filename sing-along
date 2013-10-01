@@ -1,5 +1,7 @@
 #! /bin/bash
 
+trap "kill 0" SIGINT
+
 tmpfile="/tmp/singalong-current-song"
 
 function current_artist {
