@@ -2,6 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'sinatra'
-gem 'rspec'
-gem 'lyricfy', github: 'tadejm/Lyricfy', branch: 'keep_verses'
+gem 'rspec', require: false
+gem 'lyricfy', github: 'tadejm/Lyricfy'
 
