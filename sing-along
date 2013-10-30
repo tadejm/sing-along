@@ -1,6 +1,7 @@
 #! /bin/bash
 
 trap "kill 0" SIGINT
+trap 'kill $(jobs -p)' EXIT
 
 tmpfile="/tmp/singalong-current-song"
 
@@ -35,10 +36,10 @@ fetch_lyrics "$artist" "$title" > "$tmpfile"
     if [ "$title" != "$prev_title" ] || [ "$artist" != "$prev_artist" ]; then
       prev_artist="$artist"
       prev_title="$title"
-      fetch_lyrics "$artist" "$title" >> "$tmpfile"
+      fetch_lyrics "$artist" "$title" > "$tmpfile"
     fi
     sleep 1
   done
 )&
 
-less +F "$tmpfile"
+less "$tmpfile"
