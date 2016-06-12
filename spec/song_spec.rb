@@ -4,7 +4,7 @@ describe Song do
   subject { Song.new artist, title }
 
   before do
-    SongLyrics.stub(:fetch).and_return("lalalalal")
+    allow(SongLyrics).to receive(:fetch) { "lalalalal" }
   end
 
   describe '.new' do
@@ -12,24 +12,24 @@ describe Song do
       let!(:artist) { '' }
       let!(:title)  { '' }
 
-      its(:title) { should eq('') }
-      its(:artist) { should eq('') }
+      it { expect(subject.title).to eq('') }
+      it { expect(subject.artist).to eq('') }
     end
 
     context 'when artist or title nil' do
       let!(:artist) { nil }
       let!(:title)  { nil }
 
-      its(:title) { should be_nil }
-      its(:artist) { should be_nil }
+      it { expect(subject.title).to be(nil) }
+      it { expect(subject.artist).to be(nil) }
     end
 
     context 'when valid query' do
       let(:artist) { 'Kaiser Chiefs' }
       let(:title)  { 'Ruby' }
 
-      its(:title) { should eq(title) }
-      its(:artist) { should eq(artist) }
+      it { expect(subject.title).to eq(title) }
+      it { expect(subject.artist).to eq(artist) }
     end
   end
 end

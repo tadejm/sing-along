@@ -4,12 +4,13 @@ describe SongLyrics do
   describe '#valid?' do
     context 'when artist and title are present' do
       subject { valid_subject }
-      its(:valid?) { should be_true }
+      it { expect(subject.valid?).to be(true) }
     end
 
     context 'when artist or title are missing' do
       subject { invalid_subject }
-      its(:valid?) { should be_false }
+
+      it { expect(subject.valid?).to be(false) }
     end
   end
 
@@ -17,14 +18,14 @@ describe SongLyrics do
     context 'when object instance is valid' do
       subject { valid_subject }
       it 'returns song lyrics' do
-        subject.fetch.should_not be_nil
+        expect(subject.fetch).to_not be(nil)
       end
     end
 
     context 'when object instance is invalid' do
       subject { invalid_subject }
       it 'returns nil' do
-        subject.fetch.should be_nil
+        expect(subject.fetch).to be(nil)
       end
     end
   end
