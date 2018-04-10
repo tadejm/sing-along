@@ -1,5 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/tadejm/sing-along.png)](https://codeclimate.com/github/tadejm/sing-along)
-[![Build Status](https://travis-ci.org/tadejm/sing-along.png)](https://travis-ci.org/tadejm/sing-along)
+[![CircleCI](https://circleci.com/gh/tadejm/sing-along.svg?style=svg)](https://circleci.com/gh/tadejm/sing-along)
 
 # sing-along #
 
