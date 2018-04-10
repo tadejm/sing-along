@@ -1,4 +1,4 @@
-ruby '2.3.1'
+ruby '2.5.1'
 source 'https://rubygems.org'
 
 gem 'sinatra'
@@ -7,5 +7,6 @@ gem 'lyricfy', github: 'tadejm/Lyricfy'
 group :development do
   gem 'rake'
   gem 'rspec'
+  gem "rspec_junit_formatter"
 end
 
